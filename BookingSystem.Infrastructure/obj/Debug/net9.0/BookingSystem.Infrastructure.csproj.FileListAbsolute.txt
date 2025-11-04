@@ -1,0 +1,17 @@
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/bin/Debug/net9.0/BookingSystem.Infrastructure.deps.json
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/bin/Debug/net9.0/BookingSystem.Infrastructure.runtimeconfig.json
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/bin/Debug/net9.0/BookingSystem.Infrastructure.dll
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/bin/Debug/net9.0/BookingSystem.Infrastructure.pdb
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/bin/Debug/net9.0/BookingSystem.Core.dll
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/bin/Debug/net9.0/BookingSystem.Core.pdb
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingSystem.Infrastructure.csproj.AssemblyReference.cache
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingSystem.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingSystem.Infrastructure.AssemblyInfoInputs.cache
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingSystem.Infrastructure.AssemblyInfo.cs
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingSystem.Infrastructure.csproj.CoreCompileInputs.cache
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingS.84CF42C0.Up2Date
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingSystem.Infrastructure.dll
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/refint/BookingSystem.Infrastructure.dll
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingSystem.Infrastructure.pdb
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingSystem.Infrastructure.genruntimeconfig.cache
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/ref/BookingSystem.Infrastructure.dll
