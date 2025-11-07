@@ -9,3 +9,4 @@
 /home/fatma/سطح المكتب/booking/BookingSystem.Core/obj/Debug/net9.0/refint/BookingSystem.Core.dll
 /home/fatma/سطح المكتب/booking/BookingSystem.Core/obj/Debug/net9.0/BookingSystem.Core.pdb
 /home/fatma/سطح المكتب/booking/BookingSystem.Core/obj/Debug/net9.0/ref/BookingSystem.Core.dll
+/home/fatma/سطح المكتب/booking/BookingSystem.Core/obj/Debug/net9.0/BookingSystem.Core.sourcelink.json

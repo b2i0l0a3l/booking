@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookingSystem.Application.Contract.Categories.Validator;
+using BookingSystem.Application.Interfaces;
+using BookingSystem.Application.Services.CategoryService;
 using ChatApi.Application.Interfaces;
 using ChatApi.Application.Interfaces.Auth;
 using ChatApi.Application.Services;
@@ -10,6 +13,7 @@ using ChatApi.Application.Services.AuthService.Login;
 using ChatApi.Application.Services.AuthService.Refresh;
 using ChatApi.Application.Services.AuthService.Register;
 using ChatApi.Application.Services.TokenService;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ChatApi.Application.ServiceRegistration
@@ -18,11 +22,14 @@ namespace ChatApi.Application.ServiceRegistration
     {
         public static void AddApplicationRegistration(this IServiceCollection services)
         {
+            services.AddValidatorsFromAssemblyContaining<CategoryValidator>();
+
             services.AddScoped<IToken, TokenService>();
             services.AddScoped<ILogin, LoginService>();
             services.AddScoped<IRegister, RegisterService>();
             services.AddScoped<IRefresh, RefreshService>();
             services.AddScoped<IAuth, AuthService>();
+            services.AddScoped<ICategoryService, CategoryService>();
         }
 
     }

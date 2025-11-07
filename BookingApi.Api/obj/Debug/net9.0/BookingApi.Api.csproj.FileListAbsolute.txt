@@ -151,3 +151,4 @@
 /home/fatma/سطح المكتب/booking/BookingApi.Api/obj/Debug/net9.0/BookingApi.Api.pdb
 /home/fatma/سطح المكتب/booking/BookingApi.Api/obj/Debug/net9.0/BookingApi.Api.genruntimeconfig.cache
 /home/fatma/سطح المكتب/booking/BookingApi.Api/obj/Debug/net9.0/ref/BookingApi.Api.dll
+/home/fatma/سطح المكتب/booking/BookingApi.Api/obj/Debug/net9.0/BookingApi.Api.sourcelink.json

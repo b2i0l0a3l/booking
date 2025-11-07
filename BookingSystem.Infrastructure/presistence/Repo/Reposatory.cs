@@ -32,19 +32,34 @@ namespace BookingSystem.Infrastructure.presistence.Repo
             _dbSet.Remove(Entity);
         }
 
-        public async Task<PagedResult<T>> GetAllAsync(int pageNumber, int pageSize,Expression<Func<T, bool>> predicate = null)
+        public async Task<PagedResult<T>> GetAllAsync(int pageNumber, int pageSize,Expression<Func<T, bool>>? filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+            string? includeProperties = null)
         {
             var query = _dbSet.AsQueryable();
-            if (predicate != null)
+            if (filter != null)
             {
-                query = query.Where(predicate);
+                query = query.Where(filter);
+            }
+            if (!string.IsNullOrWhiteSpace(includeProperties))
+    {
+            foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty.Trim());
+            }
+    }
+            var TotoalItems = await _dbSet.CountAsync();
+
+            if(orderBy != null)
+            {
+                query = orderBy(query);
             }
 
-            var TotoalItems = await _dbSet.CountAsync();
-            
+
             var items = await query
             .Skip((pageNumber - 1) * pageSize).
             Take(pageSize).ToListAsync();
+            
             return new PagedResult<T>
             {
                 Items = items,

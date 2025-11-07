@@ -15,3 +15,4 @@
 /home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingSystem.Infrastructure.pdb
 /home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingSystem.Infrastructure.genruntimeconfig.cache
 /home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/ref/BookingSystem.Infrastructure.dll
+/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/obj/Debug/net9.0/BookingSystem.Infrastructure.sourcelink.json

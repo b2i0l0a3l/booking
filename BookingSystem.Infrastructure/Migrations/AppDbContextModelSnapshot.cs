@@ -22,43 +22,28 @@ namespace BookingSystem.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("BookingSystem.Core.Entities.Booking", b =>
+            modelBuilder.Entity("BookingSystem.Core.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("BookingDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("BookingTime")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("UserId")
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServiceId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Bookings");
+                    b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("BookingSystem.Core.Entities.Service", b =>
+            modelBuilder.Entity("BookingSystem.Core.Entities.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,20 +51,384 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Duration")
+                    b.Property<string>("Address")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<int>("LoyaltyPoints")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+                    b.Property<string>("Phone")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services");
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Method")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("CostPrice")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<string>("SKU")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<decimal>("SellPrice")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StoreId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Barcode")
+                        .IsUnique();
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("SKU")
+                        .IsUnique();
+
+                    b.HasIndex("StoreId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.PurchaseInvoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("DueAmount")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("PaidAmount")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StoreId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoreId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("PurchaseInvoices");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.PurchaseItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("CostPrice")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PurchaseInvoiceId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("PurchaseInvoiceId");
+
+                    b.ToTable("PurchaseItems");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.SalesInvoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("DueAmount")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("PaidAmount")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StoreId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("StoreId");
+
+                    b.ToTable("SalesInvoices");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.SalesItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal?>("Discount")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SalesInvoiceId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("SellPrice")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SalesInvoiceId");
+
+                    b.ToTable("SalesItems");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.StockMovement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("ReferenceId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("StockMovements");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.Store", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Stores");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.Supplier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("ChatApi.Infrastructure.Identity.ApplicationUser", b =>
@@ -143,6 +492,9 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
+                    b.Property<int>("StoreId")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
@@ -152,12 +504,17 @@ namespace BookingSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
+
+                    b.HasIndex("StoreId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -320,23 +677,130 @@ namespace BookingSystem.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BookingSystem.Core.Entities.Booking", b =>
+            modelBuilder.Entity("BookingSystem.Core.Entities.Payment", b =>
                 {
-                    b.HasOne("BookingSystem.Core.Entities.Service", "Service")
-                        .WithMany("bookings")
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                    b.HasOne("BookingSystem.Core.Entities.SalesInvoice", null)
+                        .WithMany("Payments")
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("FK_Payment_SalesInvoice");
+                });
 
-                    b.HasOne("ChatApi.Infrastructure.Identity.ApplicationUser", "user")
-                        .WithMany("bookings")
-                        .HasForeignKey("UserId")
+            modelBuilder.Entity("BookingSystem.Core.Entities.Product", b =>
+                {
+                    b.HasOne("BookingSystem.Core.Entities.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Service");
+                    b.HasOne("BookingSystem.Core.Entities.Store", "Store")
+                        .WithMany("Products")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("user");
+                    b.Navigation("Category");
+
+                    b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.PurchaseInvoice", b =>
+                {
+                    b.HasOne("BookingSystem.Core.Entities.Store", "Store")
+                        .WithMany("PurchaseInvoices")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookingSystem.Core.Entities.Supplier", "Supplier")
+                        .WithMany("PurchaseInvoices")
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Store");
+
+                    b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.PurchaseItem", b =>
+                {
+                    b.HasOne("BookingSystem.Core.Entities.Product", "Product")
+                        .WithMany("PurchaseItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookingSystem.Core.Entities.PurchaseInvoice", "PurchaseInvoice")
+                        .WithMany("PurchaseItems")
+                        .HasForeignKey("PurchaseInvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("PurchaseInvoice");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.SalesInvoice", b =>
+                {
+                    b.HasOne("BookingSystem.Core.Entities.Customer", "Customer")
+                        .WithMany("SalesInvoices")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookingSystem.Core.Entities.Store", "Store")
+                        .WithMany("SalesInvoices")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.SalesItem", b =>
+                {
+                    b.HasOne("BookingSystem.Core.Entities.Product", "Product")
+                        .WithMany("SalesItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookingSystem.Core.Entities.SalesInvoice", "SalesInvoice")
+                        .WithMany("SalesItems")
+                        .HasForeignKey("SalesInvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("SalesInvoice");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.StockMovement", b =>
+                {
+                    b.HasOne("BookingSystem.Core.Entities.Product", "Product")
+                        .WithMany("StockMovements")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ChatApi.Infrastructure.Identity.ApplicationUser", b =>
+                {
+                    b.HasOne("BookingSystem.Core.Entities.Store", "Store")
+                        .WithMany("Users")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -390,14 +854,51 @@ namespace BookingSystem.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BookingSystem.Core.Entities.Service", b =>
+            modelBuilder.Entity("BookingSystem.Core.Entities.Category", b =>
                 {
-                    b.Navigation("bookings");
+                    b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("ChatApi.Infrastructure.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("BookingSystem.Core.Entities.Customer", b =>
                 {
-                    b.Navigation("bookings");
+                    b.Navigation("SalesInvoices");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.Product", b =>
+                {
+                    b.Navigation("PurchaseItems");
+
+                    b.Navigation("SalesItems");
+
+                    b.Navigation("StockMovements");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.PurchaseInvoice", b =>
+                {
+                    b.Navigation("PurchaseItems");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.SalesInvoice", b =>
+                {
+                    b.Navigation("Payments");
+
+                    b.Navigation("SalesItems");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.Store", b =>
+                {
+                    b.Navigation("Products");
+
+                    b.Navigation("PurchaseInvoices");
+
+                    b.Navigation("SalesInvoices");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("BookingSystem.Core.Entities.Supplier", b =>
+                {
+                    b.Navigation("PurchaseInvoices");
                 });
 #pragma warning restore 612, 618
         }
