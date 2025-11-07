@@ -11,7 +11,7 @@ namespace BookingSystem.Application.Interfaces
 {
     public interface IProductService
     {
-          Task<GeneralResponse<ProductRes?>> GetByIdAsync(int id);
+        Task<GeneralResponse<ProductRes?>> GetByIdAsync(int id);
 
         Task<GeneralResponse<PagedResult<ProductRes>>> GetAllAsync(GetProductReq entity);
 

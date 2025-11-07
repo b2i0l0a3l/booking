@@ -24,6 +24,8 @@ namespace BookingSystem.Core.Entities
 
         [Column(TypeName = "decimal(18, 2)")]
         public decimal SellPrice { get; set; }
+         public UnitType Unit { get; set; }           
+
 
         public int StockQuantity { get; set; }
 
