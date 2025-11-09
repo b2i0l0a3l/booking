@@ -13,8 +13,8 @@ namespace BookingSystem.Core.Interfaces
         public string FullName => $"{FirstName} {LastName}";
         public string? Role { get; set; }
         public DateTime CreatedAt { get; set; } 
-        public int StoreId { get; set; }
-        public Store? Store { get; set; } 
+        public IEnumerable<Store?> Store { get; set; } 
+
 
         
     }

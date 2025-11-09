@@ -13,8 +13,8 @@ namespace BookingSystem.Infrastructure.presistence.config
     {
         public void Configure(EntityTypeBuilder<Store> builder)
         {
-            builder.HasMany<ApplicationUser>(x => (List<ApplicationUser>)x.Users)
-            .WithOne(u => u.Store).HasForeignKey(u => u.StoreId);
+            builder.HasOne<ApplicationUser>(x => (ApplicationUser?)x.Users)
+            .WithMany(u => u.Store!).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

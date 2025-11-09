@@ -17,9 +17,11 @@ namespace BookingSystem.Core.Entities
         public string? Address { get; set; }
 
         [MaxLength(20)]
-        public string? Phone { get; set; } 
+        public string? Phone { get; set; }
+        public DateTime CreateAt { get; set; } = DateTime.Now;
 
-        public ICollection<IApplicationUser> Users { get; set; } = new List<IApplicationUser>();
+        public string UserId { get; set; } = string.Empty;
+        public IApplicationUser? Users { get; set; } 
 
         public ICollection<Product> Products { get; set; } = new List<Product>();
     

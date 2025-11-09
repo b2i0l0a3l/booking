@@ -4,10 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using BookingSystem.Core.Interfaces;
+using StoreSystem.Core.Entities;
+using StoreSystem.Core.enums;
 
 namespace BookingSystem.Core.Entities
 {
-    public class Product : baseEntity
+    public class Product : baseEntity 
     {
         [Required]
         [MaxLength(150)]
@@ -24,11 +27,9 @@ namespace BookingSystem.Core.Entities
 
         [Column(TypeName = "decimal(18, 2)")]
         public decimal SellPrice { get; set; }
-         public UnitType Unit { get; set; }           
-
-
+        public UnitType Unit { get; set; }           
         public int StockQuantity { get; set; }
-
+        public DateTime UpdateAt { get; set; }
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
@@ -38,10 +39,11 @@ namespace BookingSystem.Core.Entities
 
         [ForeignKey("StoreId")]
         public Store Store { get; set; } = new Store();
-     
-    public ICollection<PurchaseItem> PurchaseItems { get; set; } = new List<PurchaseItem>();
-    public ICollection<SalesItem> SalesItems { get; set; } = new List<SalesItem>();
-    public ICollection<StockMovement> StockMovements { get; set; } = new List<StockMovement>();
+
+        public ICollection<SupplierProduct> supplierProducts = new List<SupplierProduct>();
+        public ICollection<PurchaseItem> PurchaseItems { get; set; } = new List<PurchaseItem>();
+        public ICollection<SalesItem> SalesItems { get; set; } = new List<SalesItem>();
+        public ICollection<StockMovement> StockMovements { get; set; } = new List<StockMovement>();
         
     }
 }

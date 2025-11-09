@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "8jd5OcVQlbnZ2Ce5xOM9K358mysqsvTHcxjUFr/PaEc=",
-  "Source": "BookingApi.Api",
-  "BasePath": "_content/BookingApi.Api",
+  "Hash": "4lh/AEAX5mFA3lzj8QQ9QQQEk/tRO5IDaBVH2RSPstM=",
+  "Source": "StoreApi.Api",
+  "BasePath": "_content/StoreApi.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

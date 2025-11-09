@@ -7,6 +7,7 @@ using BookingSystem.Infrastructure.presistence.config;
 using ChatApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using StoreSystem.Core.Entities;
 
 namespace BookingSystem.Infrastructure.presistence
 {
@@ -24,6 +25,7 @@ namespace BookingSystem.Infrastructure.presistence
         public DbSet<SalesInvoice> SalesInvoices { get; set; }
         public DbSet<SalesItem> SalesItems { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<SupplierProduct> supplierProducts { get; set; }
         public DbSet<StockMovement> StockMovements { get; set; }
         public DbSet<TokenInfo> tokens { get; set; }
         

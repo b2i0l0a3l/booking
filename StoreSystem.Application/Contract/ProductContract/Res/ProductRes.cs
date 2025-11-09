@@ -9,6 +9,7 @@ namespace BookingSystem.Application.Contract.ProductContract.Res
     {
         public int Id { get; set; }
         public DateTime CreateAt { get; set; }
+        public DateTime UpdateAt { get; set; }
         public string Name { get; set; } = string.Empty;
 
         public string? SKU { get; set; } 
@@ -20,7 +21,6 @@ namespace BookingSystem.Application.Contract.ProductContract.Res
         public decimal SellPrice { get; set; }
 
         public int StockQuantity { get; set; }
-
         public int CategoryId { get; set; }
 
         public int StoreId { get; set; }

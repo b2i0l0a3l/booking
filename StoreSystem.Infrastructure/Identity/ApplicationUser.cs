@@ -21,8 +21,7 @@ namespace ChatApi.Infrastructure.Identity
         public string FullName => $"{FirstName} {LastName}";
         public string? Role { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public int StoreId { get; set; }
 
-        public Store? Store { get; set; } 
+        public IEnumerable<Store?> Store { get; set; } = new List<Store?>();
     }
 }

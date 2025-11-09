@@ -35,8 +35,12 @@ namespace BookingSystem.Application.Services.CategoryService
 
             var result = _validator.Validate(entity);
 
-            if(!result.IsValid)
-                return GeneralResponse<int>.Failure(string.Join(" ,",result.Errors), 400);
+            if (!result.IsValid)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.ErrorMessage));
+                return GeneralResponse<int>.Failure(string.Join(" ,",errors));
+                
+            }
             Category category = new Category { Name = entity.Name };
             await _repo.AddAsync(new Category { Name = entity.Name });
 
@@ -99,8 +103,12 @@ namespace BookingSystem.Application.Services.CategoryService
 
             var result = _validator.Validate(entity);
 
-            if(!result.IsValid)
-                return GeneralResponse<bool?>.Failure(string.Join(" ,",result.Errors), 400);
+            if (!result.IsValid)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.ErrorMessage));
+                
+                return GeneralResponse<bool?>.Failure(string.Join(" ,",errors));
+            }
             Category? category = await _repo.FindAsync(x => x.Id == Id);
             if (category == null)
                 return GeneralResponse<bool?>.Failure($"Category with Id : {Id} Not Found", 404);

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using BookingSystem.Core.Interfaces;
 
 namespace BookingSystem.Core.Entities
 {
-    public abstract class baseEntity
+    public abstract class baseEntity : IEntity
     {
         [Key]
         public int Id { get; set; }

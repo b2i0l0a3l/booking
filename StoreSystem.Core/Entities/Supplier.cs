@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using StoreSystem.Core.Entities;
 
 namespace BookingSystem.Core.Entities
 {
@@ -25,6 +26,8 @@ namespace BookingSystem.Core.Entities
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Balance { get; set; }
 
+        public ICollection<SupplierProduct> supplierProducts = new List<SupplierProduct>();
+        
         public ICollection<PurchaseInvoice> PurchaseInvoices { get; set; } = new List<PurchaseInvoice>();
         
     }

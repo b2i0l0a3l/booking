@@ -1,0 +1,12 @@
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/bin/Debug/net9.0/StoreSystem.Core.deps.json
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/bin/Debug/net9.0/StoreSystem.Core.dll
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/bin/Debug/net9.0/StoreSystem.Core.pdb
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/StoreSystem.Core.GeneratedMSBuildEditorConfig.editorconfig
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/StoreSystem.Core.AssemblyInfoInputs.cache
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/StoreSystem.Core.AssemblyInfo.cs
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/StoreSystem.Core.csproj.CoreCompileInputs.cache
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/StoreSystem.Core.sourcelink.json
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/StoreSystem.Core.dll
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/refint/StoreSystem.Core.dll
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/StoreSystem.Core.pdb
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/ref/StoreSystem.Core.dll
