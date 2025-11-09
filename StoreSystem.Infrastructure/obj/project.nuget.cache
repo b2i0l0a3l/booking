@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gVwIxF0IIYI=",
+  "dgSpecHash": "8VYnrnVgTb4=",
   "success": true,
-  "projectFilePath": "/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/BookingSystem.Infrastructure.csproj",
+  "projectFilePath": "/home/fatma/سطح المكتب/booking/StoreSystem.Infrastructure/StoreSystem.Infrastructure.csproj",
   "expectedPackageFiles": [
     "/home/fatma/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/fatma/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.10/microsoft.aspnetcore.authentication.jwtbearer.9.0.10.nupkg.sha512",

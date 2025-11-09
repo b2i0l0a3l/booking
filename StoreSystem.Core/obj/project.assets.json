@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/fatma/سطح المكتب/booking/BookingSystem.Core/BookingSystem.Core.csproj",
-      "projectName": "BookingSystem.Core",
-      "projectPath": "/home/fatma/سطح المكتب/booking/BookingSystem.Core/BookingSystem.Core.csproj",
+      "projectUniqueName": "/home/fatma/سطح المكتب/booking/StoreSystem.Core/StoreSystem.Core.csproj",
+      "projectName": "StoreSystem.Core",
+      "projectPath": "/home/fatma/سطح المكتب/booking/StoreSystem.Core/StoreSystem.Core.csproj",
       "packagesPath": "/home/fatma/.nuget/packages/",
-      "outputPath": "/home/fatma/سطح المكتب/booking/BookingSystem.Core/obj/",
+      "outputPath": "/home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/fatma/.nuget/NuGet/NuGet.Config"

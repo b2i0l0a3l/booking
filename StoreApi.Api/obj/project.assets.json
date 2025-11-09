@@ -1292,49 +1292,49 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "BookingSystem.Application/1.0.0": {
+      "StoreSystem.Application/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "BookingSystem.Infrastructure": "1.0.0",
           "FluentValidation": "12.1.0",
-          "FluentValidation.DependencyInjectionExtensions": "12.1.0"
+          "FluentValidation.DependencyInjectionExtensions": "12.1.0",
+          "StoreSystem.Infrastructure": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/BookingSystem.Application.dll": {}
+          "bin/placeholder/StoreSystem.Application.dll": {}
         },
         "runtime": {
-          "bin/placeholder/BookingSystem.Application.dll": {}
+          "bin/placeholder/StoreSystem.Application.dll": {}
         }
       },
-      "BookingSystem.Core/1.0.0": {
+      "StoreSystem.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "compile": {
-          "bin/placeholder/BookingSystem.Core.dll": {}
+          "bin/placeholder/StoreSystem.Core.dll": {}
         },
         "runtime": {
-          "bin/placeholder/BookingSystem.Core.dll": {}
+          "bin/placeholder/StoreSystem.Core.dll": {}
         }
       },
-      "BookingSystem.Infrastructure/1.0.0": {
+      "StoreSystem.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "BookingSystem.Core": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.10",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.10",
           "Microsoft.EntityFrameworkCore": "9.0.10",
           "Microsoft.EntityFrameworkCore.Design": "9.0.10",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.10",
           "Microsoft.Extensions.Configuration": "9.0.10",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+          "StoreSystem.Core": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/BookingSystem.Infrastructure.dll": {}
+          "bin/placeholder/StoreSystem.Infrastructure.dll": {}
         },
         "runtime": {
-          "bin/placeholder/BookingSystem.Infrastructure.dll": {}
+          "bin/placeholder/StoreSystem.Infrastructure.dll": {}
         }
       }
     }
@@ -3906,26 +3906,26 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "BookingSystem.Application/1.0.0": {
+    "StoreSystem.Application/1.0.0": {
       "type": "project",
-      "path": "../BookingSystem.Application/BookingSystem.Application.csproj",
-      "msbuildProject": "../BookingSystem.Application/BookingSystem.Application.csproj"
+      "path": "../StoreSystem.Application/StoreSystem.Application.csproj",
+      "msbuildProject": "../StoreSystem.Application/StoreSystem.Application.csproj"
     },
-    "BookingSystem.Core/1.0.0": {
+    "StoreSystem.Core/1.0.0": {
       "type": "project",
-      "path": "../BookingSystem.Core/BookingSystem.Core.csproj",
-      "msbuildProject": "../BookingSystem.Core/BookingSystem.Core.csproj"
+      "path": "../StoreSystem.Core/StoreSystem.Core.csproj",
+      "msbuildProject": "../StoreSystem.Core/StoreSystem.Core.csproj"
     },
-    "BookingSystem.Infrastructure/1.0.0": {
+    "StoreSystem.Infrastructure/1.0.0": {
       "type": "project",
-      "path": "../BookingSystem.Infrastructure/BookingSystem.Infrastructure.csproj",
-      "msbuildProject": "../BookingSystem.Infrastructure/BookingSystem.Infrastructure.csproj"
+      "path": "../StoreSystem.Infrastructure/StoreSystem.Infrastructure.csproj",
+      "msbuildProject": "../StoreSystem.Infrastructure/StoreSystem.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "BookingSystem.Application >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 9.0.10",
+      "StoreSystem.Application >= 1.0.0",
       "Swashbuckle.AspNetCore >= 9.0.6"
     ]
   },
@@ -3935,11 +3935,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/fatma/سطح المكتب/booking/BookingApi.Api/BookingApi.Api.csproj",
-      "projectName": "BookingApi.Api",
-      "projectPath": "/home/fatma/سطح المكتب/booking/BookingApi.Api/BookingApi.Api.csproj",
+      "projectUniqueName": "/home/fatma/سطح المكتب/booking/StoreApi.Api/StoreApi.Api.csproj",
+      "projectName": "StoreApi.Api",
+      "projectPath": "/home/fatma/سطح المكتب/booking/StoreApi.Api/StoreApi.Api.csproj",
       "packagesPath": "/home/fatma/.nuget/packages/",
-      "outputPath": "/home/fatma/سطح المكتب/booking/BookingApi.Api/obj/",
+      "outputPath": "/home/fatma/سطح المكتب/booking/StoreApi.Api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/fatma/.nuget/NuGet/NuGet.Config"
@@ -3955,8 +3955,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/home/fatma/سطح المكتب/booking/BookingSystem.Application/BookingSystem.Application.csproj": {
-              "projectPath": "/home/fatma/سطح المكتب/booking/BookingSystem.Application/BookingSystem.Application.csproj"
+            "/home/fatma/سطح المكتب/booking/StoreSystem.Application/StoreSystem.Application.csproj": {
+              "projectPath": "/home/fatma/سطح المكتب/booking/StoreSystem.Application/StoreSystem.Application.csproj"
             }
           }
         }

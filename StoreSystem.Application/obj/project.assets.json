@@ -1183,34 +1183,34 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "BookingSystem.Core/1.0.0": {
+      "StoreSystem.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "compile": {
-          "bin/placeholder/BookingSystem.Core.dll": {}
+          "bin/placeholder/StoreSystem.Core.dll": {}
         },
         "runtime": {
-          "bin/placeholder/BookingSystem.Core.dll": {}
+          "bin/placeholder/StoreSystem.Core.dll": {}
         }
       },
-      "BookingSystem.Infrastructure/1.0.0": {
+      "StoreSystem.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "BookingSystem.Core": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.10",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.10",
           "Microsoft.EntityFrameworkCore": "9.0.10",
           "Microsoft.EntityFrameworkCore.Design": "9.0.10",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.10",
           "Microsoft.Extensions.Configuration": "9.0.10",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+          "StoreSystem.Core": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/BookingSystem.Infrastructure.dll": {}
+          "bin/placeholder/StoreSystem.Infrastructure.dll": {}
         },
         "runtime": {
-          "bin/placeholder/BookingSystem.Infrastructure.dll": {}
+          "bin/placeholder/StoreSystem.Infrastructure.dll": {}
         }
       }
     }
@@ -3426,22 +3426,22 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "BookingSystem.Core/1.0.0": {
+    "StoreSystem.Core/1.0.0": {
       "type": "project",
-      "path": "../BookingSystem.Core/BookingSystem.Core.csproj",
-      "msbuildProject": "../BookingSystem.Core/BookingSystem.Core.csproj"
+      "path": "../StoreSystem.Core/StoreSystem.Core.csproj",
+      "msbuildProject": "../StoreSystem.Core/StoreSystem.Core.csproj"
     },
-    "BookingSystem.Infrastructure/1.0.0": {
+    "StoreSystem.Infrastructure/1.0.0": {
       "type": "project",
-      "path": "../BookingSystem.Infrastructure/BookingSystem.Infrastructure.csproj",
-      "msbuildProject": "../BookingSystem.Infrastructure/BookingSystem.Infrastructure.csproj"
+      "path": "../StoreSystem.Infrastructure/StoreSystem.Infrastructure.csproj",
+      "msbuildProject": "../StoreSystem.Infrastructure/StoreSystem.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "BookingSystem.Infrastructure >= 1.0.0",
       "FluentValidation >= 12.1.0",
-      "FluentValidation.DependencyInjectionExtensions >= 12.1.0"
+      "FluentValidation.DependencyInjectionExtensions >= 12.1.0",
+      "StoreSystem.Infrastructure >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3450,11 +3450,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/fatma/سطح المكتب/booking/BookingSystem.Application/BookingSystem.Application.csproj",
-      "projectName": "BookingSystem.Application",
-      "projectPath": "/home/fatma/سطح المكتب/booking/BookingSystem.Application/BookingSystem.Application.csproj",
+      "projectUniqueName": "/home/fatma/سطح المكتب/booking/StoreSystem.Application/StoreSystem.Application.csproj",
+      "projectName": "StoreSystem.Application",
+      "projectPath": "/home/fatma/سطح المكتب/booking/StoreSystem.Application/StoreSystem.Application.csproj",
       "packagesPath": "/home/fatma/.nuget/packages/",
-      "outputPath": "/home/fatma/سطح المكتب/booking/BookingSystem.Application/obj/",
+      "outputPath": "/home/fatma/سطح المكتب/booking/StoreSystem.Application/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/fatma/.nuget/NuGet/NuGet.Config"
@@ -3470,8 +3470,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/BookingSystem.Infrastructure.csproj": {
-              "projectPath": "/home/fatma/سطح المكتب/booking/BookingSystem.Infrastructure/BookingSystem.Infrastructure.csproj"
+            "/home/fatma/سطح المكتب/booking/StoreSystem.Infrastructure/StoreSystem.Infrastructure.csproj": {
+              "projectPath": "/home/fatma/سطح المكتب/booking/StoreSystem.Infrastructure/StoreSystem.Infrastructure.csproj"
             }
           }
         }

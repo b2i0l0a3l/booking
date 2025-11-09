@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\BookingSystem.Core\BookingSystem.Core.csproj" />
+    <ProjectReference Include="..\StoreSystem.Core\StoreSystem.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
