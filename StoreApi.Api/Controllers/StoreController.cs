@@ -21,10 +21,12 @@ namespace StoreApi.Api.Controllers
     {
         private readonly IStoreService _store;
         public StoreController(IStoreService store) => _store = store;
+       
         [HttpPost("GetAllStore")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<GeneralResponse<PagedResult<StoreRes>>>> GetAllStore( GetStoreReq store)
         => Ok(await _store.GetAllAsync(store));
 
@@ -39,6 +41,7 @@ namespace StoreApi.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        
         public async Task<ActionResult<GeneralResponse<bool?>>> DeleteStore([FromRoute] int StoreId)
         => Ok(await _store.DeleteAsync(StoreId));
 
@@ -47,13 +50,9 @@ namespace StoreApi.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<GeneralResponse<bool?>>> UpdateStore([FromBody] StoreReq store, int StoreId)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userId))
-                return Unauthorized("User not authenticated");
-
-           return Ok(await _store.Update(store, StoreId));
-        }
+        =>
+            Ok(await _store.Update(store, StoreId));
+        
 
         [HttpPost("AddStore")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -64,7 +63,6 @@ namespace StoreApi.Api.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized("User not authenticated");
-            
             return Ok(await _store.AddAsync(store,userId));
         }
         

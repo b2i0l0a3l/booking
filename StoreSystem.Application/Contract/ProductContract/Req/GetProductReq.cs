@@ -9,10 +9,21 @@ namespace BookingSystem.Application.Contract.ProductContract.Req
 {
     public class GetProductReq
     {
+       
         public int PageNumber { get; set; } = 1;
         public int PageSize { get; set; } = 10;
-        public Expression<Func<Product, bool>>? filter { get; set; } = null;
-        public Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy = null;
-        public string? includeProperties = null;
+        public ProductFilter? Filter { get; set; }
+        public string? OrderBy { get; set; }
+        public string? IncludeProperties { get; set; }
+    }
+
+    public class ProductFilter
+    {
+        public string? Name { get; set; }
+        public decimal? SellPrice { get; set; }
+        public int? StockQuantity { get; set; }
+        public decimal? CostPrice { get; set; }
+        public DateTime? CreateAt { get; set; }
+        public DateTime? UpdateAt { get; set; }
     }
 }

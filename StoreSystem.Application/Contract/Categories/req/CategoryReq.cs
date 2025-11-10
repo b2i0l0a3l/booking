@@ -11,5 +11,6 @@ namespace BookingSystem.Application.Contract.Categories.req
         [Required]
         [MaxLength(30)]
         public string Name { get; set; } = string.Empty;
+        public int StoreId{ get; set; }
     }
 }

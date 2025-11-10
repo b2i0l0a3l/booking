@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
+using BookingSystem.Application.Contract.Categories.req;
 using BookingSystem.Application.Contract.ProductContract.Req;
 using BookingSystem.Application.Contract.ProductContract.Res;
 using BookingSystem.Application.Contract.ProductContract.Validator;
@@ -12,6 +14,7 @@ using BookingSystem.Core.Entities;
 using BookingSystem.Core.Interfaces;
 using ChatApi.Application.Contract.Common;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
+using StoreSystem.Application.Common;
 
 namespace StoreSystem.Application.Services.ProductService
 {
@@ -50,14 +53,68 @@ namespace StoreSystem.Application.Services.ProductService
             _repo.DeleteAsync(result);
             await _repo.SaveAsync();
             return GeneralResponse<bool?>.Success(null, "Product deleted Successfully",201);
-        }   
+        }
+
+        private Expression<Func<Product, bool>>? GetFilter(GetProductReq entity)
+        {
+            if (entity.Filter == null)
+                return null;
+
+            Expression<Func<Product, bool>> expr = p => true;
+
+            if (!string.IsNullOrEmpty(entity.Filter.Name))
+                expr = expr.AndAlso(p => p.Name.ToLower().Contains(entity.Filter.Name.ToLower()));
+
+            if (entity.Filter.CreateAt.HasValue)
+                expr = expr.AndAlso(p => p.CreatedAt == entity.Filter.CreateAt.Value);
+
+            if (entity.Filter.UpdateAt.HasValue)
+                expr = expr.AndAlso(p => p.UpdateAt == entity.Filter.UpdateAt.Value);
+
+            if (entity.Filter.CostPrice.HasValue)
+                expr = expr.AndAlso(p => p.CostPrice == entity.Filter.CostPrice.Value);
+
+            if (entity.Filter.SellPrice.HasValue)
+                expr = expr.AndAlso(p => p.SellPrice == entity.Filter.SellPrice.Value);
+
+            if (entity.Filter.StockQuantity.HasValue)
+                expr = expr.AndAlso(p => p.StockQuantity == entity.Filter.StockQuantity.Value);
+
+            return expr;
+        }
+
+          private void GetOrderBy(ref Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy,GetProductReq entity)
+        {
+
+            if (!string.IsNullOrEmpty(entity.OrderBy))
+            {
+                if (entity.OrderBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+                    orderBy = q => q.OrderBy(s => s.Name);
+                else if (entity.OrderBy.Equals("CreateAt", StringComparison.OrdinalIgnoreCase))
+                    orderBy = q => q.OrderBy(s => s.CreatedAt);
+                else if (entity.OrderBy.Equals("UpdateAt", StringComparison.OrdinalIgnoreCase))
+                    orderBy = q => q.OrderBy(s => s.UpdateAt);
+                else if (entity.OrderBy.Equals("CostPricePrice", StringComparison.OrdinalIgnoreCase))
+                    orderBy = q => q.OrderBy(s => s.CostPrice);
+                else if (entity.OrderBy.Equals("StockQuantity", StringComparison.OrdinalIgnoreCase))
+                    orderBy = q => q.OrderBy(s => s.StockQuantity);
+                else if (entity.OrderBy.Equals("SellPrice", StringComparison.OrdinalIgnoreCase))
+                    orderBy = q => q.OrderBy(s => s.SellPrice);
+            }
+        }
 
         public async Task<GeneralResponse<PagedResult<ProductRes>>> GetAllAsync(GetProductReq entity)
         {
             if (entity == null)
                 return GeneralResponse<PagedResult<ProductRes>>.Failure("Invalid Data");
 
-            PagedResult<Product> pagedResult = await _repo.GetAllAsync(entity.PageNumber, entity.PageSize, entity.filter, entity.orderBy, entity.includeProperties);
+
+            Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy = null;
+            Expression<Func<Product, bool>>? expr = GetFilter(entity);
+
+            GetOrderBy(ref orderBy, entity);
+
+            PagedResult<Product> pagedResult = await _repo.GetAllAsync(entity.PageNumber, entity.PageSize, expr, orderBy, entity.IncludeProperties);
 
             if (pagedResult != null)
             {
@@ -69,7 +126,7 @@ namespace StoreSystem.Application.Services.ProductService
                 };
                 return GeneralResponse<PagedResult<ProductRes>>.Success(result, "Success", 200);
             }
-            return GeneralResponse<PagedResult<ProductRes>>.Failure("there is no products yet!",404);
+            return GeneralResponse<PagedResult<ProductRes>>.Failure("there is no products yet!", 404);
         }
 
         public async Task<GeneralResponse<ProductRes?>> GetByIdAsync(int id)

@@ -15,6 +15,7 @@ namespace BookingSystem.Application.Interfaces
          Task<GeneralResponse<CategoryRes?>> GetByIdAsync(int id);
 
         Task<GeneralResponse<PagedResult<CategoryRes>>> GetAllAsync(GetCategoryReq entity);
+        Task<GeneralResponse<PagedResult<CategoryRes>>> GetAllForStoreAsync(GetCategoryReq entity);
 
         Task<GeneralResponse<int>> AddAsync(CategoryReq entity);
 

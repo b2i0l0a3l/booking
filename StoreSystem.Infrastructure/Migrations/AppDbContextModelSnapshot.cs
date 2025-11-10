@@ -31,7 +31,12 @@ namespace StoreSystem.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("StoreId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StoreId");
 
                     b.ToTable("Categories");
                 });
@@ -684,6 +689,17 @@ namespace StoreSystem.Infrastructure.Migrations
                     b.ToTable("supplierProducts");
                 });
 
+            modelBuilder.Entity("BookingSystem.Core.Entities.Category", b =>
+                {
+                    b.HasOne("BookingSystem.Core.Entities.Store", "Store")
+                        .WithMany("categories")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Store");
+                });
+
             modelBuilder.Entity("BookingSystem.Core.Entities.Payment", b =>
                 {
                     b.HasOne("BookingSystem.Core.Entities.SalesInvoice", null)
@@ -918,6 +934,8 @@ namespace StoreSystem.Infrastructure.Migrations
                     b.Navigation("PurchaseInvoices");
 
                     b.Navigation("SalesInvoices");
+
+                    b.Navigation("categories");
                 });
 
             modelBuilder.Entity("BookingSystem.Core.Entities.Supplier", b =>

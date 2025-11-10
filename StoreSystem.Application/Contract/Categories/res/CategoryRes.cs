@@ -8,7 +8,8 @@ namespace BookingSystem.Application.Contract.Categories.res
     public record CategoryRes
     {
         public int Id { get; set; }
+        public int StoreId{ get; set; }
         public string Name { get; set; } = string.Empty;
-        
+        public DateTime CreateAt { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace BookingSystem.Core.Entities
         public IApplicationUser? Users { get; set; } 
 
         public ICollection<Product> Products { get; set; } = new List<Product>();
-    
+        public ICollection<Category> categories { get; set; } = new List<Category>();
         public ICollection<PurchaseInvoice> PurchaseInvoices { get; set; } = new List<PurchaseInvoice>();
         public ICollection<SalesInvoice> SalesInvoices { get; set; } = new List<SalesInvoice>();
     }

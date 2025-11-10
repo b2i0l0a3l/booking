@@ -9,10 +9,17 @@ namespace BookingSystem.Application.Contract.Categories.req
 {
     public record GetCategoryReq
     {
-        public int PageNumber { get; set; }
-        public int PageSize{ get; set; }
-        public Expression<Func<Category, bool>>? filter { get; set; } = null;
-        public Func<IQueryable<Category>, IOrderedQueryable<Category>>? orderBy = null;
-        public string? includeProperties = null;
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+        public CategoryFilter? Filter { get; set; }
+        public string? OrderBy { get; set; }
+        public string? IncludeProperties { get; set; }
+    }
+
+    public class CategoryFilter
+    {
+        public int? StoreId{ get; set; }
+        public string? Name { get; set; }
+        public DateTime? CreateAt { get; set; }
     }
 }

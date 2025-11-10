@@ -9,6 +9,7 @@ using BookingSystem.Core.Entities;
 using BookingSystem.Core.Interfaces;
 using BookingSystem.Infrastructure.presistence.Repo;
 using ChatApi.Application.Contract.Common;
+using StoreSystem.Application.Common;
 using StoreSystem.Application.Contract.StoreContract.req;
 using StoreSystem.Application.Contract.StoreContract.res;
 using StoreSystem.Application.Contract.StoreContract.validator;
@@ -67,34 +68,50 @@ namespace StoreSystem.Application.Services.StoreService
             var result = await _repo.FindAsync(x => x.Id == id);
             if (result == null)
                 return GeneralResponse<bool?>.Failure($"store With Id {id} Not Found", 404);
-
+            
             _repo.DeleteAsync(result);
             await _repo.SaveAsync();
             return GeneralResponse<bool?>.Success(null, "store deleted Successfully",201);
         }
-
-        public async Task<GeneralResponse<PagedResult<StoreRes>>> GetAllAsync(GetStoreReq entity)
+    private Expression<Func<Store, bool>>?  GetFilter(GetStoreReq entity)
         {
-            if (entity == null)
-                return GeneralResponse<PagedResult<StoreRes>>.Failure("Invalid Data");
+            if (entity.Filter == null)
+                return null;
 
+            Expression<Func<Store, bool>> expr = p => true;
 
-            Expression<Func<Store, bool>>? expr = null;
+            if (!string.IsNullOrEmpty(entity.Filter.Name))
+                expr = expr.AndAlso(p => p.Name.Contains(entity.Filter.Name, StringComparison.OrdinalIgnoreCase));
+
+            if (entity.Filter.CreateAt.HasValue)
+                expr = expr.AndAlso(p => p.CreatedAt == entity.Filter.CreateAt.Value);
+            return expr;
+        }
+          private Func<IQueryable<Store>, IOrderedQueryable<Store>>?  GetOrderBy(GetStoreReq entity)
+        {
+            if (entity.OrderBy == null)
+                return null;
             Func<IQueryable<Store>, IOrderedQueryable<Store>>? orderBy = null;
-            if (entity.Filter != null)
-            {
-                expr = s =>
-                    (string.IsNullOrEmpty(entity.Filter.Name) || s.Name.ToLower().Contains(entity.Filter.Name.ToLower())) ||
-                    (!entity.Filter.CreateAt.HasValue || s.CreateAt == entity.Filter.CreateAt);
-            }
 
             if (!string.IsNullOrEmpty(entity.OrderBy))
             {
                 if (entity.OrderBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
                     orderBy = q => q.OrderBy(s => s.Name);
                 else if (entity.OrderBy.Equals("CreateAt", StringComparison.OrdinalIgnoreCase))
-                    orderBy = q => q.OrderBy(s => s.CreateAt);
+                    orderBy = q => q.OrderBy(s => s.CreatedAt);
             }
+            return orderBy;
+        }
+        public async Task<GeneralResponse<PagedResult<StoreRes>>> GetAllAsync(GetStoreReq entity)
+        {
+            if (entity == null)
+                return GeneralResponse<PagedResult<StoreRes>>.Failure("Invalid Data");
+
+
+            Expression<Func<Store, bool>>? expr = GetFilter(entity);
+            Func<IQueryable<Store>, IOrderedQueryable<Store>>? orderBy = GetOrderBy(entity);
+           
+
             try
             {
 
