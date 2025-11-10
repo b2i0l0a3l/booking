@@ -46,12 +46,12 @@ namespace CategoryApi.Api.Controllers
         public async Task<ActionResult<GeneralResponse<CategoryRes>>> GetCategoryById(int CategoryId)
         => Ok(await _service.GetByIdAsync(CategoryId));
 
-        [HttpDelete("DeleteCategory")]
+        [HttpDelete("{CategoryId}",Name ="DeleteCategory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         
-        public async Task<ActionResult<GeneralResponse<bool?>>> DeleteCategory([FromRoute] int CategoryId)
+        public async Task<ActionResult<GeneralResponse<bool?>>> DeleteCategory( int CategoryId)
         => Ok(await _service.DeleteAsync(CategoryId));
 
         [HttpPut("UpdateCategory")]

@@ -33,12 +33,11 @@ namespace BookingSystem.Core.Entities
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
-        public Category Category { get; set; } = new Category();
-
+        public Category? Category { get; set; } 
         public int StoreId { get; set; }
 
         [ForeignKey("StoreId")]
-        public Store Store { get; set; } = new Store();
+        public Store? Store { get; set; } 
 
         public ICollection<SupplierProduct> supplierProducts = new List<SupplierProduct>();
         public ICollection<PurchaseItem> PurchaseItems { get; set; } = new List<PurchaseItem>();

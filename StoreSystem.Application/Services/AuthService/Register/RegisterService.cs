@@ -80,6 +80,7 @@ namespace ChatApi.Application.Services.AuthService.Register
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
+                    Role = Roles.User
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);

@@ -12,6 +12,7 @@ using BookingSystem.Core.Entities;
 using BookingSystem.Core.Interfaces;
 using ChatApi.Application.Contract.Common;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using StoreSystem.Application.Common;
 
 namespace BookingSystem.Application.Services.CategoryService
@@ -83,9 +84,9 @@ namespace BookingSystem.Application.Services.CategoryService
             Expression<Func<Category, bool>> expr = p => true;
 
             if (!string.IsNullOrEmpty(entity.Filter.Name))
-                expr = expr.AndAlso(p => p.Name.ToLower().Contains(entity.Filter.Name.ToLower()));
+                    expr = expr.AndAlso(p => EF.Functions.Like(p.Name, $"%{entity.Filter.Name}%"));
             
-            if (!entity.Filter.StoreId.HasValue && IsForStore)
+            if (entity.Filter.StoreId.HasValue && IsForStore)
                 expr = expr.AndAlso(p => p.StoreId == entity.Filter.StoreId);
 
             if (entity.Filter.CreateAt.HasValue)
@@ -103,7 +104,7 @@ namespace BookingSystem.Application.Services.CategoryService
                 if (entity.OrderBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
                     orderBy = q => q.OrderBy(s => s.Name);
                 else if (entity.OrderBy.Equals("CreateAt", StringComparison.OrdinalIgnoreCase))
-                    orderBy = q => q.OrderBy(s => s.CreatedAt);
+                    orderBy = q => q.OrderByDescending(s => s.CreatedAt);
             }
             return orderBy;
         }

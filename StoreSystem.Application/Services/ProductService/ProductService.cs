@@ -31,7 +31,7 @@ namespace StoreSystem.Application.Services.ProductService
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.ErrorMessage));
 
-                return GeneralResponse<int>.Failure(string.Join(", ", errors));
+                return GeneralResponse<int>.Failure( errors);
             }
 
            
@@ -47,12 +47,13 @@ namespace StoreSystem.Application.Services.ProductService
                 return GeneralResponse<bool?>.Failure("Invalid Data");
 
             var result = await _repo.FindAsync(x => x.Id == id);
+
             if (result == null)
                 return GeneralResponse<bool?>.Failure($"Product With Id {id} Not Found", 404);
 
             _repo.DeleteAsync(result);
             await _repo.SaveAsync();
-            return GeneralResponse<bool?>.Success(null, "Product deleted Successfully",201);
+            return GeneralResponse<bool?>.Success(null, "Product deleted Successfully",200);
         }
 
         private Expression<Func<Product, bool>>? GetFilter(GetProductReq entity)
@@ -83,9 +84,10 @@ namespace StoreSystem.Application.Services.ProductService
             return expr;
         }
 
-          private void GetOrderBy(ref Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy,GetProductReq entity)
+        private Func<IQueryable<Product>, IOrderedQueryable<Product>>?  GetOrderBy( GetProductReq entity)
         {
-
+            if (entity == null) return null;
+            Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy = null;
             if (!string.IsNullOrEmpty(entity.OrderBy))
             {
                 if (entity.OrderBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
@@ -101,6 +103,7 @@ namespace StoreSystem.Application.Services.ProductService
                 else if (entity.OrderBy.Equals("SellPrice", StringComparison.OrdinalIgnoreCase))
                     orderBy = q => q.OrderBy(s => s.SellPrice);
             }
+            return orderBy;
         }
 
         public async Task<GeneralResponse<PagedResult<ProductRes>>> GetAllAsync(GetProductReq entity)
@@ -109,10 +112,10 @@ namespace StoreSystem.Application.Services.ProductService
                 return GeneralResponse<PagedResult<ProductRes>>.Failure("Invalid Data");
 
 
-            Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy = null;
+            Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy = GetOrderBy( entity);;
             Expression<Func<Product, bool>>? expr = GetFilter(entity);
 
-            GetOrderBy(ref orderBy, entity);
+            
 
             PagedResult<Product> pagedResult = await _repo.GetAllAsync(entity.PageNumber, entity.PageSize, expr, orderBy, entity.IncludeProperties);
 
@@ -153,7 +156,7 @@ namespace StoreSystem.Application.Services.ProductService
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.ErrorMessage));
 
-                return GeneralResponse<bool?>.Failure(string.Join(", ", errors));
+                return GeneralResponse<bool?>.Failure(errors);
             }
 
             Product? product = await _repo.FindAsync(x => x.Id == Id);

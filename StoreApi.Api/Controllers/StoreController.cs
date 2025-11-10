@@ -37,12 +37,12 @@ namespace StoreApi.Api.Controllers
         public async Task<ActionResult<GeneralResponse<StoreRes>>> GetStoreById(int StoreId)
         => Ok(await _store.GetByIdAsync(StoreId));
 
-        [HttpDelete("DeleteStore")]
+        [HttpDelete("{StoreId}",Name ="DeleteStore")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         
-        public async Task<ActionResult<GeneralResponse<bool?>>> DeleteStore([FromRoute] int StoreId)
+        public async Task<ActionResult<GeneralResponse<bool?>>> DeleteStore( int StoreId)
         => Ok(await _store.DeleteAsync(StoreId));
 
         [HttpPut("UpdateStore")]
