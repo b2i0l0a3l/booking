@@ -14,7 +14,7 @@ namespace BookingSystem.Application.Contract.ProductContract.Res
         public string Name { get; set; } = string.Empty;
 
         public string? SKU { get; set; } 
-  private UnitType _Unit { get; set; }           
+        private UnitType _Unit { get; set; }           
 
         public string Unit {
             get

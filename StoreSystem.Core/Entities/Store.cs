@@ -21,8 +21,9 @@ namespace BookingSystem.Core.Entities
         public DateTime CreateAt { get; set; } = DateTime.Now;
 
         public string UserId { get; set; } = string.Empty;
-        public IApplicationUser? Users { get; set; } 
+        public IApplicationUser? Users { get; set; }
 
+        public ICollection<StockMovement> stockMovements { get; set; } = new List<StockMovement>();
         public ICollection<Product> Products { get; set; } = new List<Product>();
         public ICollection<Category> categories { get; set; } = new List<Category>();
         public ICollection<PurchaseInvoice> PurchaseInvoices { get; set; } = new List<PurchaseInvoice>();

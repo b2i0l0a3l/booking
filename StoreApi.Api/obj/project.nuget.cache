@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Nfd4EzDizHA=",
+  "dgSpecHash": "XAiuvjc2VTY=",
   "success": true,
   "projectFilePath": "/home/fatma/سطح المكتب/booking/StoreApi.Api/StoreApi.Api.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,8 @@
     "/home/fatma/.nuget/packages/fluentvalidation/12.1.0/fluentvalidation.12.1.0.nupkg.sha512",
     "/home/fatma/.nuget/packages/fluentvalidation.dependencyinjectionextensions/12.1.0/fluentvalidation.dependencyinjectionextensions.12.1.0.nupkg.sha512",
     "/home/fatma/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/home/fatma/.nuget/packages/mediatr/9.0.0/mediatr.9.0.0.nupkg.sha512",
+    "/home/fatma/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/9.0.0/mediatr.extensions.microsoft.dependencyinjection.9.0.0.nupkg.sha512",
     "/home/fatma/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.10/microsoft.aspnetcore.authentication.jwtbearer.9.0.10.nupkg.sha512",
     "/home/fatma/.nuget/packages/microsoft.aspnetcore.cryptography.internal/9.0.10/microsoft.aspnetcore.cryptography.internal.9.0.10.nupkg.sha512",
     "/home/fatma/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/9.0.10/microsoft.aspnetcore.cryptography.keyderivation.9.0.10.nupkg.sha512",

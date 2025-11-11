@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "KIW2MdZ2pis=",
+  "dgSpecHash": "7c75d8C5J3I=",
   "success": true,
   "projectFilePath": "/home/fatma/سطح المكتب/booking/StoreSystem.Core/StoreSystem.Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/fatma/.nuget/packages/mediatr/9.0.0/mediatr.9.0.0.nupkg.sha512",
+    "/home/fatma/.nuget/packages/mediatr.extensions.microsoft.dependencyinjection/9.0.0/mediatr.extensions.microsoft.dependencyinjection.9.0.0.nupkg.sha512",
+    "/home/fatma/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/2.0.0/microsoft.extensions.dependencyinjection.abstractions.2.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

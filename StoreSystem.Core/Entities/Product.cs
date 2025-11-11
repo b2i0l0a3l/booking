@@ -37,8 +37,9 @@ namespace BookingSystem.Core.Entities
         public int StoreId { get; set; }
 
         [ForeignKey("StoreId")]
-        public Store? Store { get; set; } 
+        public Store? Store { get; set; }
 
+         public ICollection<Stock> Stocks { get; set; } = new List<Stock>();
         public ICollection<SupplierProduct> supplierProducts = new List<SupplierProduct>();
         public ICollection<PurchaseItem> PurchaseItems { get; set; } = new List<PurchaseItem>();
         public ICollection<SalesItem> SalesItems { get; set; } = new List<SalesItem>();

@@ -10,3 +10,4 @@
 /home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/refint/StoreSystem.Core.dll
 /home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/StoreSystem.Core.pdb
 /home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/ref/StoreSystem.Core.dll
+/home/fatma/سطح المكتب/booking/StoreSystem.Core/obj/Debug/net9.0/StoreSystem.Core.csproj.AssemblyReference.cache

@@ -13,19 +13,35 @@ using BookingSystem.Core.common;
 using BookingSystem.Core.Entities;
 using BookingSystem.Core.Interfaces;
 using ChatApi.Application.Contract.Common;
+using MediatR;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using StoreSystem.Application.Common;
+using StoreSystem.Application.EventHandler.Product;
+using StoreSystem.Core.Events.Product;
+using StoreSystem.Core.Interfaces;
 
 namespace StoreSystem.Application.Services.ProductService
 {
-    public class ProductService(IReposatory<Product> _repo, ProductValidator _validator,IMapper _mapper) : IProductService
+    public class ProductService : IProductService
     {
+        private readonly IReposatory<Product> _repo;
+        private ProductValidator _Validator;
+        private IMapper _Mapper;
+        private IEventBus _Mediator;
+        public ProductService(IReposatory<Product> repo, ProductValidator Validator, IMapper Mapper,IEventBus Mediator)
+        {
+            _repo = repo;
+            _Validator = Validator;
+            _Mapper = Mapper;
+            _Mediator = Mediator;
+        }
+        
         public async Task<GeneralResponse<int>> AddAsync(ProductReq entity)
         {
             if (entity == null)
                 return GeneralResponse<int>.Failure("Invalid Data");
 
-            var result = _validator.Validate(entity);
+            var result = _Validator.Validate(entity);
 
             if (!result.IsValid)
             {
@@ -34,10 +50,12 @@ namespace StoreSystem.Application.Services.ProductService
                 return GeneralResponse<int>.Failure( errors);
             }
 
-           
-            Product product = _mapper.Map<Product>(entity);
+
+            Product product = _Mapper.Map<Product>(entity);
             await _repo.AddAsync(product);
             await _repo.SaveAsync();
+
+            await _Mediator.PublishAsync(new ProductCreatedEvent(product.Id, product.UpdateAt ,product.StockQuantity ));
             return GeneralResponse<int>.Success(product.Id, "Product Added Successfully",201);
         }
 
@@ -123,7 +141,7 @@ namespace StoreSystem.Application.Services.ProductService
             {
                 PagedResult<ProductRes> result = new()
                 {
-                    Items = pagedResult.Items.Select(x => _mapper.Map<ProductRes>(x)).ToList(),
+                    Items = pagedResult.Items.Select(x => _Mapper.Map<ProductRes>(x)).ToList(),
                     PageNumber = pagedResult.PageNumber,
                     PageSize = pagedResult.PageSize
                 };
@@ -139,7 +157,7 @@ namespace StoreSystem.Application.Services.ProductService
 
             Product? product = await _repo.FindAsync(x => x.Id == id);
             if (product != null)
-                return GeneralResponse<ProductRes?>.Success(_mapper.Map<ProductRes>(product), "success", 200);
+                return GeneralResponse<ProductRes?>.Success(_Mapper.Map<ProductRes>(product), "success", 200);
             
             return GeneralResponse<ProductRes?>.Failure($"there is no product with that Id {id} ");
             
@@ -151,7 +169,7 @@ namespace StoreSystem.Application.Services.ProductService
                 return GeneralResponse<bool?>.Failure("Invalid Data");
 
 
-            var result = _validator.Validate(entity);
+            var result = _Validator.Validate(entity);
             if (!result.IsValid)
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.ErrorMessage));
@@ -164,7 +182,7 @@ namespace StoreSystem.Application.Services.ProductService
             if (product == null)
                 return GeneralResponse<bool?>.Failure($"there is no product with that Id : {Id}");
 
-            _mapper.Map(entity, product);
+            _Mapper.Map(entity, product);
             await _repo.SaveAsync();
             return GeneralResponse<bool?>.Success(null, "Product Updated Successfully",200);
             

@@ -1,11 +1,14 @@
+using System.Reflection;
 using BookingSystem.Infrastructure.presistence;
 using ChatApi.Api.Extension;
 using ChatApi.Application.ServiceRegistration;
 using ChatApi.Infrastructure.Identity;
 using ChatApi.Infrastructure.InfrastructureRegistration;
 using ChatApi.Infrastructure.JWT;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StoreSystem.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer(); 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
