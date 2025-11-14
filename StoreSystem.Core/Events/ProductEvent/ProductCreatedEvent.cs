@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace StoreSystem.Core.Events.Product
+namespace StoreSystem.Core.Events.ProductEvent
 {
     public class ProductCreatedEvent : INotification
     {
